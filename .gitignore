@@ -1,2 +1,4 @@
-.class
-.log
+Company.class
+Employee.class
+javac-services.0.log
+javac-services.0.log.lck
