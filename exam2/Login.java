@@ -1,3 +1,5 @@
+import java.io.*; 
+//For Hash function
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +28,6 @@ public class Login extends JFrame implements ActionListener
     Login frame = new Login();
   }
 */
-
   /**
    * Create the frame.
    */
@@ -76,7 +77,7 @@ public class Login extends JFrame implements ActionListener
       {
         s = s + arr[i];
       }
-      System.out.println( s );
+      System.out.println( "Original: " + s + " Hash: " + s.hashCode() );
       // Aqui va el codigo de validacion de datos contra el archivo
       JOptionPane.showMessageDialog(this,"Datos correctos");
     }
