@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Data extends Login {
 
-    Map map = new HashMap();
+    public Map map = Login.map;
     /*
     // Put elements to the map
     map.put("Ram", new Double(3434.34));
