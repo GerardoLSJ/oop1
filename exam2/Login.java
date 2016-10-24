@@ -73,8 +73,9 @@ public class Login extends JFrame implements ActionListener
         while( (linea = br.readLine()) != null )
         {
         String[] line = linea.split(",");
+        String hashed = line[1];
         map.put(line[0],line[1]);
-        System.out.println( "s: " + line[1]  );
+        System.out.println( "s: " + hashed.hashCode()  );
         }
         
         br.close();
@@ -94,17 +95,29 @@ public class Login extends JFrame implements ActionListener
       b = (JButton)o;
     if( b == btnAceptar )
     {
-      String s1 = tfLogin.getText();
-      char arr[] = tfPassword.getPassword();
-      String s = s1 + ",";
-      for( int i=0; i<arr.length; i++ )
+      String user = tfLogin.getText();
+      char[] passArr = tfPassword.getPassword();
+      String pass="";
+
+      for( int i=0; i<passArr.length; i++ )
       {
-        s = s + arr[i];
+        pass = pass + passArr[i];
       }
-       System.out.println( "map: " + map.get("ada")  );
-      System.out.println( "Original: " + s + " Hash: " + s.hashCode() );
+
+      System.out.println( "map: " + map.get(user)  );
+      System.out.println( "user: " + user + " pass: "+ pass);
       // Aqui va el codigo de validacion de datos contra el archivo
-      JOptionPane.showMessageDialog(this,"Datos correctos");
+
+      if(map.get(user) != null && (pass.hashCode() == map.get(user))){
+          JOptionPane.showMessageDialog(this,"Datos correctos");
+
+      }else if(map.get(user) != null){
+          JOptionPane.showMessageDialog(this,"Usuario correcto, contraseña erronea");
+      }
+      else{
+           JOptionPane.showMessageDialog(this,"Usuario no encontrado");
+      }
+      
     }
     else if( b == btnCancelar )
     {
