@@ -72,16 +72,18 @@ public class Login extends JFrame implements ActionListener
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("archivo.txt" )));
         while( (linea = br.readLine()) != null )
         {
-        String[] line = linea.split(",");
-        String hashed = line[1];
-        map.put(line[0],line[1]);
-        System.out.println( "s: " + hashed.hashCode()  );
+            if(linea.length() > 0){
+                    String[] line = linea.split(",");
+                    map.put(line[0],line[1]);
+            }else{
+
+            }
         }
         
         br.close();
         
             } catch(IOException e){
-                System.out.println( e );
+                //System.out.println(e);
 
         }
 
@@ -104,14 +106,19 @@ public class Login extends JFrame implements ActionListener
         pass = pass + passArr[i];
       }
 
-      System.out.println( "map: " + map.get(user)  );
-      System.out.println( "user: " + user + " pass: "+ pass);
+      System.out.println( "user: " + user + " pass: "+ pass + "Expected: " + map.get(user));
       // Aqui va el codigo de validacion de datos contra el archivo
+     int intPass = 0;
+      if(map.get(user) != null){
+           intPass = Integer.valueOf((String) map.get(user));
+      }else{
+           intPass = 0;
+      }
 
-      if(map.get(user) != null && (pass.hashCode() == map.get(user))){
+      if(intPass != 0 && (pass.hashCode() == intPass)){
           JOptionPane.showMessageDialog(this,"Datos correctos");
 
-      }else if(map.get(user) != null){
+      }else if(intPass != 0){
           JOptionPane.showMessageDialog(this,"Usuario correcto, contraseña erronea");
       }
       else{
