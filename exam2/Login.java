@@ -1,10 +1,8 @@
 import java.io.*; 
-import java.util.*;
-//For Hash function
+import java.util.*; //For Hash function
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,7 +63,10 @@ public class Login extends JFrame implements ActionListener
     this.setVisible(true);
   }
 
-  
+  /**
+   * Load the data from the TXT to a local Dictionary
+   * for performance and reliability
+   */
     public void load(){
         try {
         String linea = "";
@@ -75,18 +76,12 @@ public class Login extends JFrame implements ActionListener
             if(linea.length() > 0){
                     String[] line = linea.split(",");
                     map.put(line[0],line[1]);
-            }else{
-
-            }
+            }else{}
         }
-        
         br.close();
-        
             } catch(IOException e){
                 //System.out.println(e);
-
         }
-
     }
 
   public void actionPerformed( ActionEvent event )
@@ -107,14 +102,15 @@ public class Login extends JFrame implements ActionListener
       }
 
       System.out.println( "user: " + user + " pass: "+ pass + "Expected: " + map.get(user));
-      // Aqui va el codigo de validacion de datos contra el archivo
-     int intPass = 0;
+      int intPass = 0;
       if(map.get(user) != null){
+          //Since map returns an Objet we cast it to Integer
            intPass = Integer.valueOf((String) map.get(user));
       }else{
+        //If returns NULL means that the user didn't exist
            intPass = 0;
       }
-
+        //We Hash() the input and compare it with the Dict.
       if(intPass != 0 && (pass.hashCode() == intPass)){
           JOptionPane.showMessageDialog(this,"Datos correctos");
 
